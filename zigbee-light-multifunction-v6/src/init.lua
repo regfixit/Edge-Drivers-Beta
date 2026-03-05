@@ -15,6 +15,7 @@
 -- *******  Created by Mariano Colmenarejo (sep 2021) *********
 
 --- Smartthings library load ---
+local temp_utils = require('utils-color-temp') --add color temp conversion for XYZ bulbs with no native color temp @regfixit
 local capabilities = require "st.capabilities"
 local ZigbeeDriver = require "st.zigbee"
 local defaults = require "st.zigbee.defaults"
@@ -111,6 +112,7 @@ local function set_color_Temperature_handler(self,device,command)
     print("handler_Color Temp >>>>>>>>>>>>>>",command.args.temperature)
   end
   local colorTemp = command.args.temperature
+  
   if device.preferences.limitColorTemp == true then 
     if colorTemp > device.preferences.colorTempMaxim then 
       colorTemp = tonumber(math.floor(device.preferences.colorTempMaxim))
@@ -118,6 +120,27 @@ local function set_color_Temperature_handler(self,device,command)
       colorTemp = tonumber(math.floor(device.preferences.colorTempMinim))
     end
   end
+  
+  -- INTERCEPT FOR BULBS WITH CALCULATED WHITE TEMPERATURE(XY mode)
+  print(">>> Calculated preference <<<",device.preferences.colorTempCalculated) 
+  if device.preferences.colorTempCalculated == true then
+--    if device.preferences.logDebugPrint then 
+      print(">>> Preference Active: Running XY Calculation <<<") 
+--    end
+    print(">>> MATCH FOUND: Running XY Calculation <<<")
+-- Use the Tanner Helland Algorithm
+    local x, y = temp_utils.kelvin_to_xy(colorTemp)
+
+    local x_val = math.floor(x * 0xFFFF)
+    local y_val = math.floor(y * 0xFFFF)
+
+    device:send(zcl_clusters.ColorControl.server.commands.MoveToColor(device, x_val, y_val, 0x0000))
+    device:emit_event(capabilities.colorTemperature.colorTemperature(colorTemp))
+    return
+  end
+  
+  -- ... (Rest of Mariano's original code follows)
+  
   device:set_field(LAST_KELVIN_SET .. command.component, colorTemp)
   local colorTemp_Mireds= utils.round(1000000 / colorTemp)
   --print("colorTemp Mired", colorTemp_Mireds)
