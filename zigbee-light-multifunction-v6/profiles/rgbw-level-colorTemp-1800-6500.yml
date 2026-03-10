@@ -1,4 +1,4 @@
-name: rgbw-level-colortemp-1800-6500
+name: rgbw-level-dom
 components:
 - id: main
   capabilities:
