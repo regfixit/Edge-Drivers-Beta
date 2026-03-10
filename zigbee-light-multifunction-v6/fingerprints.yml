@@ -4,6 +4,11 @@ zigbeeManufacturer:
     manufacturer: _TZ3000_49qchf10
     model: TS0502A
     deviceProfileName: level-colortemp-2000-6500
+  - id: "OSRAM/Classic A60 RGBW"
+    deviceLabel: OSRAM A60 RGBW
+    manufacturer: OSRAM
+    model: Classic A60 RGBW
+    deviceProfileName: rgbw-level-colortemp-2000-6500
   - id: "OSRAM/Classic"
     deviceLabel: OSRAM Classic
     manufacturer: OSRAM
@@ -314,6 +319,11 @@ zigbeeManufacturer:
     manufacturer: innr
     model: RB 285 C
     deviceProfileName: rgbw-level-colortemp-2700-6500
+  - id: "innr/RB 282 C"
+    deviceLabel: innr RGBW
+    manufacturer: innr
+    model: RB 282 C
+    deviceProfileName: rgbw-level-colortemp-2000-6500
   - id: "eWeLight/ZB-CT01"
     deviceLabel: eWeLight CCT
     manufacturer: eWeLight
@@ -1142,6 +1152,7 @@ zigbeeManufacturer:
     manufacturer: IKEA of Sweden
     model: TRADFRI bulb E27 CWS opal 600lm
     deviceProfileName: level-rgb-colortemp-calculated  #@regfixit
+    # deviceProfileName: rgbw-level-colortemp-2200-4000  #@regfixit    
   - id: "TRADFRI bulb E26 CWS opal 600lm"
     deviceLabel: IKEA E26 Bulb
     manufacturer: IKEA of Sweden

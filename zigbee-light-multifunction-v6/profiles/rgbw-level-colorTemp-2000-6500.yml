@@ -13,7 +13,7 @@ components:
     #config:
       #values:
         #- key: "colorTemperature.value"
-          #range: [ 2000, 6500 ]
+          #range: [ 1800, 6500 ]
   - id: legendabsolute60149.colorTemperatureSteps
     version: 1
   - id: colorControl
@@ -267,9 +267,9 @@ preferences:
     required: false
     preferenceType: number
     definition:
-      minimum: 2000
+      minimum: 1800
       maximum: 6000
-      default: 2000
+      default: 1800
   - name: "colorTempMaxim"
     title: "ColorTemp Increment Max value (k)"
     description: "Select Maximum Color Temp Increment value (3000k to 6500k, Default: 6500). Used as maximum Color Temp for Circadian function. Use as general limit if preference: Use ColorTemp Min and Max as limits = true"
@@ -285,7 +285,7 @@ preferences:
     required: false
     preferenceType: boolean
     definition:
-      default: false
+      default: true
   - name: "circadLevelMin"
     title: "Circadian Lighting MIN Level %"
     description: "Select Minimum Level for Circadian Lighting function: (1 to 100, Default: 50)"
@@ -416,7 +416,7 @@ deviceConfig:
       version: 1
       values:
         - key: "colorTemperature.value"
-          range: [ 2000, 6500 ]
+          range: [ 1800, 6500 ]
     - component: main
       capability: legendabsolute60149.colorTemperatureSteps
       version: 1
@@ -484,7 +484,7 @@ deviceConfig:
         version: 1
         values:
         - key: "colorTemperature.value"
-          range: [ 2000, 6500 ]
+          range: [ 1800, 6500 ]
       - component: main
         capability: legendabsolute60149.colorTemperatureSteps
         version: 1
@@ -542,7 +542,7 @@ deviceConfig:
         version: 1
         values:
         - key: "setColorTemperature"
-          range: [ 2000, 6500 ]
+          range: [ 1800, 6500 ]
       - component: main
         capability: legendabsolute60149.colorTemperatureSteps
         version: 1

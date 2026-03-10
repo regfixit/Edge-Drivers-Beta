@@ -1,0 +1,53 @@
+local test = require "integration_test"
+local t_utils = require "integration_test.utils"
+
+print("--- STARTING DIRECT HANDLER TEST ---")
+
+-- 1. Capability Registration (Using the fixed path logic)
+local handle = io.popen('dir "capabilities" /b')
+if handle then
+  for filename in handle:lines() do
+    if filename:match("%.json$") then
+      test.add_package_capability(filename)
+    end
+  end
+  handle:close()
+end
+
+-- 2. Build Device
+local device = test.mock_device.build_test_zigbee_device({
+  profile = t_utils.get_profile_definition("rgbw-level-colorTemp-2000-6500.yml")})
+
+-- Inject preferences directly into the device object
+device.preferences = {
+    colorTempMaxim = 6500,
+    colorTempMinim = 2000,
+    logDebugPrint = true,
+    limitColorTemp = true,
+    tempTransTime = 1
+}
+test.mock_device.add_test_device(device)
+
+-- 3. Load Driver
+package.path = package.path .. ";./src/?.lua"
+local zigbee_bulb = require "init"
+
+-- 4. MANUALLY RUN THE HANDLER
+-- We skip the dispatcher and call the function by name from the driver template
+print("\n--- TRIGGERING COLOR TEMP HANDLER DIRECTLY ---")
+
+local command = {
+  args = { temperature = 2000 },
+  component = "main"
+}
+
+-- Look up the handler in your capability_handlers table and call it
+local handler = zigbee_bulb.capability_handlers["colorTemperature"]["setColorTemperature"]
+
+if handler then
+    handler(zigbee_bulb, device, command)
+else
+    print("Error: Could not find the setColorTemperature handler in the driver table.")
+end
+
+print("\n--- SIMULATION COMPLETE ---")

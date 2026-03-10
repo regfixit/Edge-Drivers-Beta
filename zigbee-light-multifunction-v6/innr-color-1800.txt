@@ -1,0 +1,35 @@
+name: innr-color-1800
+components:
+- id: main
+  capabilities:
+  - id: switch
+    version: 1
+  - id: switchLevel
+    version: 1
+  - id: colorControl
+    version: 1
+  - id: colorTemperature
+    version: 1
+  - id: refresh
+    version: 1
+  categories:
+  - name: Light
+preferences:
+  - name: "colorTempMin"
+    title: "Minimum Color Temperature"
+    description: "Bulb minimum (default: 1800)"
+    required: false
+    preferenceType: integer
+    definition:
+      minimum: 1800
+      maximum: 6500
+      default: 1800
+  - name: "colorTempMax"
+    title: "Maximum Color Temperature"
+    description: "Bulb maximum (default: 6500)"
+    required: false
+    preferenceType: integer
+    definition:
+      minimum: 1800
+      maximum: 6500
+      default: 6500

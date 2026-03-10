@@ -1,0 +1,20 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Lua Simulator",
+            "type": "shell",
+            "command": "lua",
+            "args": ["${workspaceFolder}/src/test/simulator.lua"],
+            "options": {
+                "env": {
+                    "LUA_PATH": "C:/Users/Dom/Documents/Smartthings/lua_libs-api_v16/?.lua;C:/Users/Dom/Documents/Smartthings/lua_libs-api_v16/?/init.lua;${workspaceFolder}/src/?.lua;${workspaceFolder}/src/?/init.lua;;"
+                }
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        }
+    ]
+}
