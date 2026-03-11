@@ -1,5 +1,5 @@
-name: 'Zigbee Light Multifunction DMM'
-packageKey: 'Zigbee_Light_Multifunction_v6.2_DMM'
+name: 'Zigbee Light Multifunction Dm'
+packageKey: 'Zigbee_Light_Multifunction_dm'
 description: 'Devices Supported: https://github.com/Mariano-Github/Edge-Drivers-Beta/blob/main/zigbee-light-multifunction-v6/fingerprints.yml'
 permissions:
   zigbee: {}

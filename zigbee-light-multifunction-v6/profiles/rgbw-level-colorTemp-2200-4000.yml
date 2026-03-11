@@ -106,6 +106,7 @@ preferences:
     preferenceType: enumeration
     definition:
       options:
+        "18006500": "RGBW-1800k-6500k"            
         "20006500": "RGBW-2000k-6500k"
         "22004000": "RGBW-2200k-4000k"
         "27006500": "RGBW-2700k-6500k"

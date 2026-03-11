@@ -1,4 +1,5 @@
 --- Smartthings library load ---
+local model_to_profile = require "models_map"
 local capabilities = require "st.capabilities"
 local zcl_clusters = require "st.zigbee.zcl.clusters"
 local OnOff = zcl_clusters.OnOff
@@ -99,6 +100,27 @@ function driver_handler.do_init (self, device)
 
   print("<<<<< Device Init >>>>>>")
   print("<<<<< device:", device)
+
+-- --- START CUSTOM PROFILE MAPPING ---
+  if device.network_type ~= "DEVICE_EDGE_CHILD" then
+    local mfr = device:get_manufacturer() or "Unknown"
+    local model = device:get_model() or "Unknown"
+    local lookup_key = mfr .. "/" .. model
+    
+    print(">>> Identity Check: " .. lookup_key)
+    
+    local target_profile = model_to_profile[lookup_key]
+    
+    if target_profile then
+      if device.active_profile ~= target_profile then
+        print(">>> SWAPPING PROFILE TO: " .. target_profile)
+        device:try_update_metadata({profile = target_profile})
+      else
+        print(">>> Profile already matches: " .. target_profile)
+      end
+    end
+  end
+-- --- END CUSTOM PROFILE MAPPING ---
 
   -- set ZLL_xy device to "no" defaults
   --device:set_field("zll_xy", "no") -- quitado por no necesario

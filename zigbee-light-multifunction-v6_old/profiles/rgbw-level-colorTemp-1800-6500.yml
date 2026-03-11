@@ -1,4 +1,4 @@
-name: rgbw-level-colortemp-1800-6500
+name: rgbw-level-colortemp-2000-6500
 components:
 - id: main
   capabilities:
@@ -10,6 +10,10 @@ components:
     version: 1
   - id: colorTemperature
     version: 1
+    #config:
+      #values:
+        #- key: "colorTemperature.value"
+          #range: [ 1800, 6500 ]
   - id: legendabsolute60149.colorTemperatureSteps
     version: 1
   - id: colorControl
@@ -102,10 +106,10 @@ preferences:
     preferenceType: enumeration
     definition:
       options:
-        "18006500": "RGBW-1800k-6500k"            
         "20006500": "RGBW-2000k-6500k"
         "22004000": "RGBW-2200k-4000k"
         "27006500": "RGBW-2700k-6500k"
+        "18006500": "RGBW-1800k-6500k"        
         "RGB": "RGB"
       default: "18006500"
   - name: "restoreState"
@@ -374,6 +378,8 @@ metadata:
   deviceType: Light
   ocfDeviceType: oic.d.light
   deviceTypeId: Light
+  #mnmn: SmartThingsCommunity
+  #vid: b076d726-d2e9-3fa1-be98-dd4442c706d4
 deviceConfig:
   dashboard:
     states:

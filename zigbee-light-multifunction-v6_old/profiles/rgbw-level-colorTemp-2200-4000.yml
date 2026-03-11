@@ -1,4 +1,4 @@
-name: rgbw-level-colortemp-1800-6500
+name: rgbw-level-colortemp-2200-4000
 components:
 - id: main
   capabilities:
@@ -10,6 +10,10 @@ components:
     version: 1
   - id: colorTemperature
     version: 1
+    #config:
+      #values:
+        #- key: "colorTemperature.value"
+          #range: [ 2200, 4000 ]
   - id: legendabsolute60149.colorTemperatureSteps
     version: 1
   - id: colorControl
@@ -72,7 +76,7 @@ preferences:
       default:  300
   - name: "localTimeOffset"
     title: "Local Time Offset to UTC (-12 to 12)"
-    description: "Select Your Local Time Offset to UTC Time Hours (-12 to 12, Default:0)."
+    description: "Select Your Local Time Offset to UTC Time Hours (-12 to 12, Default:0)"
     required: false
     preferenceType: integer
     definition:
@@ -97,17 +101,17 @@ preferences:
       default: 0
   - name: "changeProfile"
     title: "Select Profile for Color Temperature"
-    description: "WARNING CHECK YOUR PREFERENCES: Color Temp Max and Min must be into the Profile Color Temperature Range. Select Profile for Color Temperature, (Default: 2000k-6500k)."
+    description: "WARNING CHECK YOUR PREFERENCES: Color Temp Max and Min must be into the Profile Color Temperature Range. Select Profile for Color Temperature, (Default: 2200k-4000k)."
     required: false
     preferenceType: enumeration
     definition:
       options:
-        "18006500": "RGBW-1800k-6500k"            
         "20006500": "RGBW-2000k-6500k"
         "22004000": "RGBW-2200k-4000k"
         "27006500": "RGBW-2700k-6500k"
+        "18006500": "RGBW-1800k-6500k"
         "RGB": "RGB"
-      default: "18006500"
+      default: "22004000"
   - name: "restoreState"
     title: "ATTEMPT Restore State if Power Lost"
     description: "WARNNING: COULD NOT WORK\n After the power supply is back on, the State can be restored to previous state or remain switched off (Default: Device restores previous state)"
@@ -229,7 +233,7 @@ preferences:
     definition:
       minimum: 0.5
       maximum: 25
-      default: 10 
+      default: 10
   - name: "progLevelColor"
     title: "Progressive (Level-TempColor) Active"
     description: "Select Progressive Level-TempColor Active (Default: No)"
@@ -260,29 +264,29 @@ preferences:
       default: 18
   - name: "colorTempMinim"
     title: "Color Temperature  Min value (k)"
-    description: "Select Maximum Color Temp Increment value (2000k to 6000k, Default: 2000). Used as minimum Color Temp for Circadian function. Use as general limit if preference: Use ColorTemp Min and Max as limits = true"
+    description: "Select Maximum Color Temp Increment value (2200k to 3800k, Default: 2200)"
     required: false
     preferenceType: number
     definition:
-      minimum: 1800
-      maximum: 6000
-      default: 1800
+      minimum: 2200
+      maximum: 3800
+      default: 2200
   - name: "colorTempMaxim"
     title: "ColorTemp Increment Max value (k)"
-    description: "Select Maximum Color Temp Increment value (3000k to 6500k, Default: 6500). Used as maximum Color Temp for Circadian function. Use as general limit if preference: Use ColorTemp Min and Max as limits = true"
+    description: "Select Maximum Color Temp Increment value (2700k to 4000k, Default: 4000)"
     required: false
     preferenceType: number
     definition:
-      minimum: 3000
-      maximum: 6500
-      default: 6500 
+      minimum: 2700
+      maximum: 4000
+      default: 4000 
   - name: "limitColorTemp"
     title: "Use ColorTemp Min and Max as limits"
     description: "Use ColorTemp Min and Max values as limits for this device"
     required: false
     preferenceType: boolean
     definition:
-      default: true
+      default: false
   - name: "circadLevelMin"
     title: "Circadian Lighting MIN Level %"
     description: "Select Minimum Level for Circadian Lighting function: (1 to 100, Default: 50)"
@@ -328,8 +332,8 @@ preferences:
         "Continuos": "Change in +/- value rate level"
       default: "Step"
   - name: "groupAdd"
-    title: "Add Device to Group Number"
-    description: "Insert Group number to Add this device. Value = 0, Get All Groups in History Events, (Default: 0)"
+    title: "Add Group Number"
+    description: "Insert Group number to Add. Value = 0, Get All Groups in History Events, (Default: 0)"
     required: false
     preferenceType: number
     definition:
@@ -337,8 +341,8 @@ preferences:
       maximum: 65535
       default: 0 
   - name: "groupRemove"
-    title: "Remove Device Group Number"
-    description: "Insert Group number to Remove from this device. Value = 0, all Groups Removed"
+    title: "Remove Group Number"
+    description: "Insert Group number to Remove. Value = 0, all Groups Removed, (Default: 1)"
     required: false
     preferenceType: number
     definition:
@@ -374,6 +378,8 @@ metadata:
   deviceType: Light
   ocfDeviceType: oic.d.light
   deviceTypeId: Light
+  #mnmn: SmartThingsCommunity
+  #vid: 2487e9c4-19c1-3bf2-af98-6f24281906a3
 deviceConfig:
   dashboard:
     states:
@@ -411,7 +417,7 @@ deviceConfig:
       version: 1
       values:
         - key: "colorTemperature.value"
-          range: [ 1800, 6500 ]
+          range: [ 2200, 4000 ]
     - component: main
       capability: legendabsolute60149.colorTemperatureSteps
       version: 1
@@ -479,7 +485,7 @@ deviceConfig:
         version: 1
         values:
         - key: "colorTemperature.value"
-          range: [ 1800, 6500 ]
+          range: [ 2200, 4000 ]
       - component: main
         capability: legendabsolute60149.colorTemperatureSteps
         version: 1
@@ -537,7 +543,7 @@ deviceConfig:
         version: 1
         values:
         - key: "setColorTemperature"
-          range: [ 1800, 6500 ]
+          range: [ 2200, 4000 ]
       - component: main
         capability: legendabsolute60149.colorTemperatureSteps
         version: 1
